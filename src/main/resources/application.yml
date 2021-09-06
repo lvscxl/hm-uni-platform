@@ -1,0 +1,18 @@
+server:
+  port: 1689
+spring:
+  application:
+    name: hm-uni-platfom-boot
+  datasource:
+    username: root
+    password: 123456
+    url: jdbc:mysql://localhost:3306/ik_pdd?useUnicode=true&characterEncoding=utf8&useSSL=true&serverTimezone=GMT%2B8
+  redis:
+    url: redis://hadoop102:6379/
+#debug: true
+mybatis:
+  config-location: classpath*:mapper/*.xml
+  type-aliases-package: com.zp.pdd.portal.po
+mybatis-plus:
+  configuration:
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
