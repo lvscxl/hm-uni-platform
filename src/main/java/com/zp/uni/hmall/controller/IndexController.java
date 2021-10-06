@@ -2,6 +2,7 @@ package com.zp.uni.hmall.controller;
 
 import com.zp.uni.hmall.common.CommonResult;
 import com.zp.uni.hmall.vo.DtOrderGoodsVo;
+import com.zp.uni.hmall.vo.PageVo;
 import com.zp.uni.hmall.vo.SwiperVo;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -41,20 +42,23 @@ public class IndexController {
     }
 
     @GetMapping("/getgoods")
-    public CommonResult getgoods() {
+    public CommonResult getgoods(Integer pageIndex, Integer pageSize) {
 
+        PageVo objectPageVo = new PageVo<>(pageIndex, pageSize);
         List<DtOrderGoodsVo> list = new ArrayList<>();
-        for (int i =0; i < 5; i++) {
+        for (int i =0; i < 45; i++) {
             DtOrderGoodsVo dtOrderGoodsVo = new DtOrderGoodsVo();
-            dtOrderGoodsVo.setId(i+"1");
+            dtOrderGoodsVo.setId(i+pageIndex*1000 +"9");
             dtOrderGoodsVo.setImgUrl("/static/image/pingguo1.jpg");
             dtOrderGoodsVo.setMarketPrice("123" +i);
             dtOrderGoodsVo.setSellPrice("234");
-            dtOrderGoodsVo.setTitle("高兴"+i);
+            dtOrderGoodsVo.setTitle("高兴"+i+pageIndex*1000);
             list.add(dtOrderGoodsVo);
         }
-
-        return CommonResult.success(list);
+        objectPageVo.setTotal(90L);
+        objectPageVo.setData(list);
+        System.out.println(" pageIndex : " + pageIndex);
+        return CommonResult.success(objectPageVo);
     }
 
 
